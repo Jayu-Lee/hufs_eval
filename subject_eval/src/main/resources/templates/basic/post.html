@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+    <title>Write Article</title>
+</head>
+<body>
+    <h1>Write a New Article</h1>
+    <form th:action="@{/post}" method="post">
+        <label for="articleTitle">Article Title:</label>
+        <input type="text" id="articleTitle" name="articleTitle" required><br>
+        <label for="prfsrName">Professor Name:</label>
+        <input type="text" id="prfsrName" name="prfsrName" required><br>
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" required></textarea><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

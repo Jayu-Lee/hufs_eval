@@ -2,28 +2,33 @@ package hufs_evaluation.subject_eval.writing;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.annotation.PostConstruct;
 
 @Controller
 @Slf4j
 @RequiredArgsConstructor
 public class WritingController {
 
-    @Autowired
-    private WritingService writingService;
-    private WritingRepository writingRepository;
+    private final WritingService writingService;
+    private final WritingRepository writingRepository;
 
     @GetMapping("/")
     public String writePage(){
-        return "post";
+        return "basic/post";
     }
 
     @PostMapping("/post")
     public String post(Article article) {
         writingRepository.save(article);
-        return "post";
+        return "redirect:";
+    }
+
+    @PostConstruct
+    public void init() {
+        writingRepository.save(new Article(1L, "세상은 무엇으로 사는가", "윤일동", "매우나쁨"));
     }
 }

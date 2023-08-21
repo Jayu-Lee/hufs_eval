@@ -30,9 +30,9 @@ public class Article {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime localDateTime;
+//    @CreatedDate
+//    @Column(updatable = false)
+//    private LocalDateTime localDateTime;
 
     @Builder
     public Article(Long id, String articleTitle, String prfsrName, String content) {
