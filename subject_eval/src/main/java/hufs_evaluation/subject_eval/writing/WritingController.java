@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -39,7 +40,7 @@ public class WritingController {
 
     @GetMapping("/view/{id}")
     public String article(@PathVariable long id, Model model) {
-        Article article = writingRepository.findById(id);
+        Optional<Article> article = writingRepository.findById(id);
         model.addAttribute("article", article);
         return "basic/article";
     }
