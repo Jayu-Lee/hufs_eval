@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
@@ -9,16 +9,27 @@
 <div class="container" style="max-width: 600px">
     <div class="py-5 text-center">
         <h2>Content</h2>
+        <a herf="/post" class="btn btn-primary">게시글을 작성해보세요.</a>
     </div>
 
     <hr class="my-4">
     <div>
         <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>articleTitle</th>
+                    <th>PrfsrName</th>
+                </tr>
+            </thead>
             <tbody>
-            <tr>
-
+            <tr th:each="article : ${articles}">
+                <td>
+                    <a th:href="@{'/article/' + ${article.id}"} th:text="${article.articleTitle}"></a>
+                </td>
+                <td th:text="${article.prfsrName}"></td>
+                <td th:text="${article.localDateTime}"></td>
             </tr>
-
             </tbody>
         </table>
     </div>
