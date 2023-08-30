@@ -20,7 +20,7 @@ public class WritingController {
     private final WritingService writingService;
     private final WritingRepository writingRepository;
 
-    @GetMapping("/")
+    @GetMapping("/write")
     public String writePage(){
         return "basic/post";
     }
@@ -28,7 +28,7 @@ public class WritingController {
     @PostMapping("/post")
     public String post(Article article) {
         writingRepository.save(article);
-        return "redirect:";
+        return "redirect:/view";
     }
 
     @GetMapping("/view")
