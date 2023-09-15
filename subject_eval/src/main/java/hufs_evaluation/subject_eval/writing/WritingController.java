@@ -47,6 +47,6 @@ public class WritingController {
 
     @PostConstruct
     public void init() {
-        writingRepository.save(new Article(1L, "세상은 무엇으로 사는가", "윤일동", "매우나쁨"));
+        writingRepository.save(new Article(1L, "사람은 무엇으로 사는가", "윤일동", "매우나쁨"));
     }
 }
