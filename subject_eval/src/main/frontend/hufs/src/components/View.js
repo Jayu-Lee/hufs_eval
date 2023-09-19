@@ -1,6 +1,6 @@
 import React from 'react';
 
-function View(props) {
+function Content(props) {
     return (
         <div className="container" style={{ maxWidth: '600px' }}>
             <div className="py-5 text-center">
@@ -20,7 +20,7 @@ function View(props) {
                     </tr>
                     </thead>
                     <tbody>
-                    {props.articles && props.articles.map((article) => (
+                    {props.articles.map((article) => (
                         <tr key={article.id}>
                             <td>
                                 <a href={`/article/${article.id}`}>{article.id}</a>
@@ -30,11 +30,10 @@ function View(props) {
                         </tr>
                     ))}
                     </tbody>
-
                 </table>
             </div>
         </div>
     );
 }
 
-export default View;
+export default Content;
