@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 
 class Post extends Component {
     constructor(props) {
@@ -66,7 +67,7 @@ class Post extends Component {
                     </div>
                     <br />
                     <div>
-                        <button type="submit">Submit</button>
+                        <Link to="/view">제출 </Link>
                     </div>
                 </form>
             </div>
