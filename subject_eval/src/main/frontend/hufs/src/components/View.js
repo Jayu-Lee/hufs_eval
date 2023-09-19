@@ -1,6 +1,20 @@
 import React from 'react';
 
-function Content(props) {
+function View(props) {
+    if (!props.articles) {
+        // props.articles가 정의되지 않았거나 null인 경우 처리
+        return (
+            <div className="container" style={{ maxWidth: '600px' }}>
+                <div className="py-5 text-center">
+                    <h2>Content</h2>
+                    <a href="/write" className="btn btn-primary">게시글을 작성해보세요.</a>
+                </div>
+                <hr className="my-4" />
+                <p>게시글이 없습니다</p>
+            </div>
+        );
+    }
+
     return (
         <div className="container" style={{ maxWidth: '600px' }}>
             <div className="py-5 text-center">
@@ -36,4 +50,4 @@ function Content(props) {
     );
 }
 
-export default Content;
+export default View;
