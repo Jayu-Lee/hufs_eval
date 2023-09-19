@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
+import {Link, Route, Routes} from "react-router-dom";
+
 
 class Post extends Component {
     constructor(props) {
@@ -19,8 +20,11 @@ class Post extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        // 이 부분에서 서버로 데이터를 전송하거나 다른 작업을 수행할 수 있습니다.
+        //서버로 데이터를 전송
         console.log('Form data:', this.state);
+
+        // /view 로 리다이렉트
+        this.props.history.push('/view');
     }
 
     render() {

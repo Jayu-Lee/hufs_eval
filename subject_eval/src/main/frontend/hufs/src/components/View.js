@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 function View(props) {
     if (!props.articles) {
@@ -7,7 +8,7 @@ function View(props) {
             <div className="container" style={{ maxWidth: '600px' }}>
                 <div className="py-5 text-center">
                     <h2>Content</h2>
-                    <a href="/write" className="btn btn-primary">게시글을 작성해보세요.</a>
+                    <Link to="/post">게시글을 작성해보세요.</Link>
                 </div>
                 <hr className="my-4" />
                 <p>게시글이 없습니다</p>
@@ -19,7 +20,7 @@ function View(props) {
         <div className="container" style={{ maxWidth: '600px' }}>
             <div className="py-5 text-center">
                 <h2>Content</h2>
-                <a href="/write" className="btn btn-primary">게시글을 작성해보세요.</a>
+                <Link to="/post">게시글을 작성해보세요.</Link>
             </div>
 
             <hr className="my-4" />

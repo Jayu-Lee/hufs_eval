@@ -16,8 +16,6 @@ function App() {
           </nav>
           <Routes>
               <Route path="/post" element={<Post />}/>
-          </Routes>
-          <Routes>
               <Route path="/view" element={<View />}/>
           </Routes>
       </div>
