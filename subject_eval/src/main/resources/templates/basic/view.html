@@ -9,7 +9,7 @@
 <div class="container" style="max-width: 600px">
     <div class="py-5 text-center">
         <h2>Content</h2>
-        <a herf="/write" class="btn btn-primary">게시글을 작성해보세요.</a>
+        <a herf="/write" th:onclick="|location.href='@{/write}'|" class="btn btn-primary">게시글을 작성해보세요.</a>
     </div>
 
     <hr class="my-4">
@@ -24,10 +24,8 @@
             </thead>
             <tbody>
             <tr th:each="article : ${articles}">
-                <td>
-                    <a th:href="@{'/article/' + ${article.id}}" th:text="${article.id}"></a>
-                </td>
-                <td th:text="${article.articleTitle}"></td>
+                <td><a th:href="@{/article/{id}(id=${article.id})}" th:text="${article.id}"></a></td>
+                <td><a th:href="@{/article/{id}(id=${article.id})}" th:text="${article.articleTitle}"></a></td>
                 <td th:text="${article.prfsrName}"></td>
             </tr>
             </tbody>

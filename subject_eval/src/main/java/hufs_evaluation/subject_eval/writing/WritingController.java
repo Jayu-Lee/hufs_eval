@@ -20,22 +20,22 @@ public class WritingController {
     private final WritingService writingService;
     private final WritingRepository writingRepository;
 
+    @GetMapping("/")
+    public String view(Model model) {
+        List<Article> articles = writingRepository.findAll();
+        model.addAttribute("articles", articles);
+        return "basic/view";
+    }
+
     @GetMapping("/write")
     public String writePage(){
         return "basic/post";
     }
 
-    @PostMapping("/post")
+    @PostMapping("/write")
     public String post(Article article) {
         writingRepository.save(article);
-        return "redirect:/view";
-    }
-
-    @GetMapping("/view")
-    public String view(Model model) {
-        List<Article> articles = writingRepository.findAll();
-        model.addAttribute("articles", articles);
-        return "basic/view";
+        return "redirect:/";
     }
 
     @GetMapping("/view/{id}")
