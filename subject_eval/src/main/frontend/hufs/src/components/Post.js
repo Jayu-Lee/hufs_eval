@@ -1,82 +1,79 @@
-import React, { Component } from 'react';
-import {Link, Route, Routes} from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+function Post() {
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        articleTitle: '',
+        prfsrName: '',
+        content: '',
+    });
 
-class Post extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            articleTitle: '',
-            prfsrName: '',
-            content: '',
-        };
-    }
-
-    handleChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value,
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
         });
     }
 
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        //서버로 데이터를 전송
-        console.log('Form data:', this.state);
+        // 서버로 데이터를 전송
+        console.log('Form data:', formData);
 
-        // /view 로 리다이렉트
-        this.props.history.push('/view');
+        // /view 로 프로그래밍 방식으로 리디렉션
+        navigate('/view');
     }
 
-    render() {
-        return (
-            <div className="container">
-                <div className="py-5 text-center">
-                    <h1>Write a New Article</h1>
-                </div>
-                <form onSubmit={(e) => this.handleSubmit(e)}>
-                    <div>
-                        <label htmlFor="articleTitle">Article Title:</label>
-                        <input
-                            type="text"
-                            id="articleTitle"
-                            name="articleTitle"
-                            className="form-control"
-                            required
-                            value={this.state.articleTitle}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="prfsrName">Professor Name:</label>
-                        <input
-                            type="text"
-                            id="prfsrName"
-                            name="prfsrName"
-                            className="form-control"
-                            required
-                            value={this.state.prfsrName}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="content">Content:</label>
-                        <textarea
-                            id="content"
-                            name="content"
-                            className="form-control"
-                            required
-                            value={this.state.content}
-                            onChange={this.handleChange}
-                        ></textarea>
-                    </div>
-                    <br />
-                    <div>
-                        <Link to="/view">제출 </Link>
-                    </div>
-                </form>
+    return (
+        <div className="container">
+            <div className="py-5 text-center">
+                <h1>Write a New Article</h1>
             </div>
-        );
-    }
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="articleTitle">Article Title:</label>
+                    <input
+                        type="text"
+                        id="articleTitle"
+                        name="articleTitle"
+                        className="form-control"
+                        required
+                        value={formData.articleTitle}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="prfsrName">Professor Name:</label>
+                    <input
+                        type="text"
+                        id="prfsrName"
+                        name="prfsrName"
+                        className="form-control"
+                        required
+                        value={formData.prfsrName}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="content">Content:</label>
+                    <textarea
+                        id="content"
+                        name="content"
+                        className="form-control"
+                        required
+                        value={formData.content}
+                        onChange={handleChange}
+                    ></textarea>
+                </div>
+                <br />
+                <div>
+                    <button type="submit">제출</button>
+                </div>
+            </form>
+        </div>
+    );
 }
 
 export default Post;
