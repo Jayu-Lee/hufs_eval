@@ -1,6 +1,6 @@
 package hufs_evaluation.subject_eval.writing.dto;
 
-import hufs_evaluation.subject_eval.writing.Article;
+import hufs_evaluation.subject_eval.writing.domain.Article;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -17,7 +17,6 @@ public class WritingDto {
 
     public Article toEntity() {
         Article build = Article.builder()
-                .id(id)
                 .articleTitle(articleTitle)
                 .prfsrName(prfsrName)
                 .content(content)

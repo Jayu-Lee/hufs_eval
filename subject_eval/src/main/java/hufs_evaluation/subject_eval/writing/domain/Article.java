@@ -1,9 +1,6 @@
-package hufs_evaluation.subject_eval.writing;
+package hufs_evaluation.subject_eval.writing.domain;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -13,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
 @EntityListeners(AuditingEntityListener.class)
 public class Article {
 
@@ -34,11 +31,17 @@ public class Article {
     @Column(updatable = false)
     private LocalDateTime localDateTime;
 
+    private String password;
+
     @Builder
-    public Article(Long id, String articleTitle, String prfsrName, String content) {
-        this.id = id;
+    public Article(String articleTitle, String prfsrName, String content, String password) {
         this.articleTitle = articleTitle;
         this.prfsrName = prfsrName;
         this.content = content;
+        this.password = password;
+
+    }
+
+    public Article() {
     }
 }
