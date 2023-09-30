@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class ArticleApiController {
 
     private final WritingService writingService;
@@ -26,9 +27,16 @@ public class ArticleApiController {
         return new Result(collect);
     }
 
+    //API 통신 테스트
+    @GetMapping("/api/viewTest")
+    public String articlesTest() {
+        return "Hello!";
+    }
+
     // Article 개별 조회
     @GetMapping("/api/view/{id}")
     public ArticleDto article(@PathVariable("id") Long id) {
+
         Article article = writingService.findOne(id);
         return new ArticleDto(article.getArticleTitle(), article.getPrfsrName(), article.getContent());
     }
