@@ -1,5 +1,7 @@
-package hufs_evaluation.subject_eval.writing;
+package hufs_evaluation.subject_eval.writing.controller;
 
+import hufs_evaluation.subject_eval.writing.service.WritingService;
+import hufs_evaluation.subject_eval.writing.domain.Article;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -8,9 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -18,11 +18,10 @@ import java.util.Optional;
 public class WritingController {
 
     private final WritingService writingService;
-    private final WritingRepository writingRepository;
 
     @GetMapping("/")
     public String view(Model model) {
-        List<Article> articles = writingRepository.findAll();
+        List<Article> articles = writingService.findArticles();
         model.addAttribute("articles", articles);
         return "basic/view";
     }
@@ -34,19 +33,14 @@ public class WritingController {
 
     @PostMapping("/write")
     public String post(Article article) {
-        writingRepository.save(article);
+        writingService.join(article);
         return "redirect:/";
     }
 
     @GetMapping("/view/{id}")
-    public String article(@PathVariable long id, Model model) {
-        Optional<Article> article = writingRepository.findById(id);
-        model.addAttribute("article", article);
+    public String article(@PathVariable Long id, Model model) {
+        Article findArticle = writingService.findOne(id);
+        model.addAttribute("article", findArticle);
         return "basic/article";
-    }
-
-    @PostConstruct
-    public void init() {
-        writingRepository.save(new Article(1L, "사람은 무엇으로 사는가", "윤일동", "매우나쁨"));
     }
 }

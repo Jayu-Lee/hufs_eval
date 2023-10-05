@@ -5,11 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@EnableJpaAuditing
+//@EnableJpaAuditing
 public class SubjectEvalApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SubjectEvalApplication.class, args);
+	public static void main(String[] args) {SpringApplication.run(SubjectEvalApplication.class, args);
 	}
 
 }

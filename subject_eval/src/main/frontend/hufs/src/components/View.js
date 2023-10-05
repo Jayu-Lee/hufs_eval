@@ -8,7 +8,7 @@ function View(props) {
 
     useEffect(() => {
         // Axios를 사용하여 데이터 가져오기
-        axios.get('/api/articles') // 실제 API 엔드포인트로 변경해야 합니다.
+        axios.get('/api') // 실제 API 엔드포인트로 변경해야 합니다.
             .then((response) => {
                 // 요청이 성공하면 데이터를 상태에 저장합니다.
                 setArticles(response.data);
