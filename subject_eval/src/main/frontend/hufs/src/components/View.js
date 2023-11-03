@@ -8,10 +8,10 @@ function View(props) {
 
     useEffect(() => {
         // Axios를 사용하여 데이터 가져오기
-        axios.get('/api') // 실제 API 엔드포인트로 변경해야 합니다.
+        axios.get('/api/view') // 스프링 백엔드의 엔드포인트로 변경
             .then((response) => {
                 // 요청이 성공하면 데이터를 상태에 저장합니다.
-                setArticles(response.data);
+                setArticles(response.data.data); // 'data' 프로퍼티에 실제 데이터가 들어 있을 것으로 예상됩니다.
                 setLoading(false);
             })
             .catch((error) => {
@@ -19,7 +19,7 @@ function View(props) {
                 console.error('데이터를 가져오는 중 오류 발생:', error);
                 setLoading(false);
             });
-    }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 실행
+    }, []);
 
     if (loading) {
         return <p>데이터를 로딩 중입니다...</p>;
@@ -62,8 +62,8 @@ function View(props) {
                             <td>
                                 <Link to={`/article/${article.id}`}>{article.id}</Link>
                             </td>
-                            <td>{article.articleTitle}</td>
-                            <td>{article.prfsrName}</td>
+                            <td><Link to={`/article/${article.id}`}>{article.articleTitle}</Link></td>
+                            <td><Link to={`/article/${article.id}`}>{article.prfsrName}</Link></td>
                         </tr>
                     ))}
                     </tbody>

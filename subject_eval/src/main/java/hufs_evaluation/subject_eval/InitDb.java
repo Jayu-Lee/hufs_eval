@@ -28,7 +28,10 @@ public class InitDb {
 
         public void dbInit() {
             Article article = createArticle(1L, "사람은 무엇으로 사는가", "윤일동", "매우나쁨", "1234");
+            Article article2 = createArticle(2L, "세상에서 제일 재미없는 자료구조", "신찬수", "매우나쁨", "1234");
+
             em.persist(article);
+            em.persist(article2);
         }
 
         private Article createArticle(long id, String articleTitle, String prfsrName, String content, String password) {
