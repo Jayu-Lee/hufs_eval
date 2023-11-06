@@ -5,11 +5,15 @@ server:
 
 
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/hufs_eval?characterEncoding=UTF-8&serverTimezone=UTC #listArticle TABLE 생성
-    username: root
-    password: 123qweasd@ #비밀번호
+  config:
+    import: "classpath:application-db.yml" # RDS 연동
+
+# 기존 로컬 db
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/hufs_eval?characterEncoding=UTF-8&serverTimezone=UTC #listArticle TABLE 생성
+#    username: root
+#    password: 1234 #비밀번호
 
   profiles:
     include: API-KEY

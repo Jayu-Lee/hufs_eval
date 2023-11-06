@@ -21,7 +21,7 @@ public class ArticleApiController {
     public Result articles() {
         List<Article> articles = writingService.findArticles();
         List<ArticleDto> collect = articles.stream()
-                .map(a -> new ArticleDto(a.getArticleTitle(), a.getPrfsrName(), a.getContent()))
+                .map(a -> new ArticleDto(a.getId(), a.getArticleTitle(), a.getPrfsrName(), a.getContent()))
                 .collect(Collectors.toList());
 
         return new Result(collect);
@@ -38,7 +38,7 @@ public class ArticleApiController {
     public ArticleDto article(@PathVariable("id") Long id) {
 
         Article article = writingService.findOne(id);
-        return new ArticleDto(article.getArticleTitle(), article.getPrfsrName(), article.getContent());
+        return new ArticleDto(article.getId(), article.getArticleTitle(), article.getPrfsrName(), article.getContent());
     }
 
     // Article 생성
@@ -102,6 +102,7 @@ public class ArticleApiController {
     @Data
     @AllArgsConstructor
     static class ArticleDto {
+        private Long id;
         private String articleTitle;
         private String prfsrName;
         private String content;

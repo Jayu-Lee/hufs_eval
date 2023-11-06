@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Git Submodule
+src/main/resources/application-db.yml
+src/main/frontend/hufs/src/db.js
