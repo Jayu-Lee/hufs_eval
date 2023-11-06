@@ -36,3 +36,21 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// submodule 의 yml 파일 복사
+task('copySecretDB', type:Copy) {
+	copy {
+		from './hufs_eval_private'
+		include "*.yml"
+		into './src/main/resources'
+	}
+}
+
+// submodule 의 js 파일 복사
+task('copySecretJS', type: Copy) {
+	copy {
+		from './hufs_eval_private'
+		include "*.js"
+		into './src/main/frontend/hufs/src'
+	}
+}
