@@ -3,10 +3,13 @@ server:
   servlet:
     context-path: /
 
-
 spring:
   config:
     import: "classpath:application-db.yml" # RDS 연동
+
+    hikari:
+      maxLifeTime: 3590000
+      maximum-pool-size: 30
 
 # 기존 로컬 db
 #  datasource:
