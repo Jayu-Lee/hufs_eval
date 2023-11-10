@@ -1,3 +1,6 @@
 [submodule "subject_eval/hufs_eval_private"]
 	path = subject_eval/hufs_eval_private
 	url = https://github.com/aoi562227/hufs_eval_private
+[submodule "hufs_eval_private"]
+	path = hufs_eval_private
+	url = https://github.com/aoi562227/hufs_eval_private.git
