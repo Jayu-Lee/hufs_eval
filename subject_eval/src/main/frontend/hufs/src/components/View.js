@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function View(props) {
+    const { id } = useParams();
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         // Axios를 사용하여 데이터 가져오기
-        axios.get('/api/view') // 스프링 백엔드의 엔드포인트로 변경
+        axios.get('/api/article/${id}') // 스프링 백엔드의 엔드포인트로 변경
             .then((response) => {
                 // 요청이 성공하면 데이터를 상태에 저장합니다.
-                setArticles(response.data.data); // 'data' 프로퍼티에 실제 데이터가 들어 있을 것으로 예상됩니다.
+                setArticles(response.data); // 'data' 프로퍼티에 실제 데이터가 들어 있을 것으로 예상됩니다.
                 setLoading(false);
             })
             .catch((error) => {
@@ -20,6 +21,12 @@ function View(props) {
                 setLoading(false);
             });
     }, []);
+
+    const handleDelete = (id) => {
+        axios.delete('/api/article/${id}').then(() => {
+            setArticles(articles.filter((article) => article.id !== id));
+        });
+    };
 
     if (loading) {
         return <p>데이터를 로딩 중입니다...</p>;
