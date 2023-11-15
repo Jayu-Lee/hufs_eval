@@ -54,3 +54,7 @@ task('copySecretJS', type: Copy) {
 		into './src/main/frontend/hufs/src'
 	}
 }
+
+jar {
+	enabled = false
+}
