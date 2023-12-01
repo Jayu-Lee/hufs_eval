@@ -6,17 +6,16 @@ function View(props) {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const { id } = useParams();
+    const [selectedArticle, setSelectedArticle] = useState(null);
 
     useEffect(() => {
-        // Axios를 사용하여 데이터 가져오기
-        axios.get(`/api/view`) // 스프링 백엔드의 엔드포인트로 변경
+        axios.get(`/api/view`)
             .then((response) => {
-                // 요청이 성공하면 데이터를 상태에 저장
-                setArticles(response.data); // 'data' 프로퍼티에 실제 데이터가 들어 있을 것으로 예상
+                setArticles(response.data);
                 setLoading(false);
             })
             .catch((error) => {
-                // 요청이 실패하면 에러를 처리합니다.
+                // 요청 실패하면 에러 처리
                 console.error('데이터를 가져오는 중 오류 발생:', error);
                 setLoading(false);
             });
@@ -29,15 +28,19 @@ function View(props) {
     };
 
     const handleArticleClick = (id) => {
-    axios.get(`/api/article/${id}`)
-        .then((response) => {
-            const fullArticle = response.data;
-            console.log('본문 보기:', fullArticle);
-        })
-        .catch((error) => {
-            console.error('글 내용을 가져오는 중 오류 발생:', error);
-        });
-};
+        axios.get(`/api/article/${id}`)
+            .then((response) => {
+                const fullArticle = response.data;
+                setSelectedArticle(fullArticle);
+            })
+            .catch((error) => {
+                console.error('글 내용을 가져오는 중 오류 발생:', error);
+            });
+    };
+
+    const closeModal = () => {
+        setSelectedArticle(null);
+    };
 
     if (loading) {
         return <p>데이터를 로딩 중입니다...</p>;
@@ -72,6 +75,7 @@ function View(props) {
                         <th>ID</th>
                         <th>articleTitle</th>
                         <th>PrfsrName</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -86,11 +90,24 @@ function View(props) {
                                 <td>
                                     <Link to={`/article/${article.id}`}>{article.prfsrName}</Link>
                                 </td>
+                                <td>
+                                    <button onClick={() => handleDelete(article.id)}>Delete</button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
+
+            {selectedArticle && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={closeModal}>&times;</span>
+                        <h2>{selectedArticle.articleTitle}</h2>
+                        <p>{selectedArticle.content}</p>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
