@@ -9,10 +9,10 @@ function View(props) {
 
     useEffect(() => {
         // Axios를 사용하여 데이터 가져오기
-        axios.get(`/api/article/${id}`) // 스프링 백엔드의 엔드포인트로 변경
+        axios.get(`/api/view`) // 스프링 백엔드의 엔드포인트로 변경
             .then((response) => {
-                // 요청이 성공하면 데이터를 상태에 저장합니다.
-                setArticles(response.data); // 'data' 프로퍼티에 실제 데이터가 들어 있을 것으로 예상됩니다.
+                // 요청이 성공하면 데이터를 상태에 저장
+                setArticles(response.data); // 'data' 프로퍼티에 실제 데이터가 들어 있을 것으로 예상
                 setLoading(false);
             })
             .catch((error) => {
@@ -20,13 +20,24 @@ function View(props) {
                 console.error('데이터를 가져오는 중 오류 발생:', error);
                 setLoading(false);
             });
-    }, [id]);
+    }, []);
 
     const handleDelete = (id) => {
         axios.delete(`/api/article/${id}`).then(() => {
             setArticles(articles.filter((article) => article.id !== id));
         });
     };
+
+    const handleArticleClick = (id) => {
+    axios.get(`/api/article/${id}`)
+        .then((response) => {
+            const fullArticle = response.data;
+            console.log('본문 보기:', fullArticle);
+        })
+        .catch((error) => {
+            console.error('글 내용을 가져오는 중 오류 발생:', error);
+        });
+};
 
     if (loading) {
         return <p>데이터를 로딩 중입니다...</p>;
@@ -65,7 +76,7 @@ function View(props) {
                     </thead>
                     <tbody>
                         {articles.map((article) => (
-                            <tr key={article.id}>
+                            <tr key={article.id} onClick={() => handleArticleClick(article.id)}>
                                 <td>
                                     <Link to={`/article/${article.id}`}>{article.id}</Link>
                                 </td>
