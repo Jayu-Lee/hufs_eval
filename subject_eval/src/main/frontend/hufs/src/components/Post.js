@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Post() {
     const navigate = useNavigate();
@@ -19,11 +20,16 @@ function Post() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // 서버로 데이터를 전송
-        console.log('Form data:', formData);
 
-        // /view 로 프로그래밍 방식으로 리디렉션
-        navigate('/view');
+        // Axios로 서버로 데이터 전송
+        axios.post('/api/article', formData)
+            .then((response) => {
+                console.log('서버 응답:', response.data);
+                navigate('/view');
+            })
+            .catch((error) => {
+                console.error('데이터를 전송하는 중 오류 발생:', error);
+            });
     }
 
     return (
