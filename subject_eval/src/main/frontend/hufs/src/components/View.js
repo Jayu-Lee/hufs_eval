@@ -9,7 +9,7 @@ function View(props) {
     const [selectedArticle, setSelectedArticle] = useState(null);
 
     useEffect(() => {
-        axios.get(`/api/view`)
+        axios.get(`/api/view/`)
             .then((response) => {
                 setArticles(response.data);
                 setLoading(false);
@@ -22,13 +22,13 @@ function View(props) {
     }, []);
 
     const handleDelete = (id) => {
-        axios.delete(`/api/article/${id}`).then(() => {
+        axios.delete(`/api/view/${id}`).then(() => {
             setArticles(articles.filter((article) => article.id !== id));
         });
     };
 
     const handleArticleClick = (id) => {
-        axios.get(`/api/article/${id}`)
+        axios.get(`/api/view/${id}`)
             .then((response) => {
                 const fullArticle = response.data;
                 setSelectedArticle(fullArticle);
