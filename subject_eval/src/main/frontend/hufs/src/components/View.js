@@ -28,9 +28,11 @@ function View(props) {
     };
 
     const handleArticleClick = (id) => {
+        console.log('Fetching article with ID:', id);
         axios.get(`/api/view/${id}`)
             .then((response) => {
                 const fullArticle = response.data;
+                console.log('Full Article:', fullArticle);
                 setSelectedArticle(fullArticle);
             })
             .catch((error) => {
@@ -82,13 +84,13 @@ function View(props) {
                         {articles.map((article) => (
                             <tr key={article.id} onClick={() => handleArticleClick(article.id)}>
                                 <td>
-                                    <Link to={`/article/${article.id}`}>{article.id}</Link>
+                                    <Link to={`/view/${article.id}`}>{article.id}</Link>
                                 </td>
                                 <td>
-                                    <Link to={`/article/${article.id}`}>{article.articleTitle}</Link>
+                                    <Link to={`/view/${article.id}`}>{article.articleTitle}</Link>
                                 </td>
                                 <td>
-                                    <Link to={`/article/${article.id}`}>{article.prfsrName}</Link>
+                                    <Link to={`/view/${article.id}`}>{article.prfsrName}</Link>
                                 </td>
                                 <td>
                                     <button onClick={() => handleDelete(article.id)}>Delete</button>
