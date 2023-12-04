@@ -11,7 +11,7 @@ function View(props) {
     useEffect(() => {
         axios.get(`/api/view/`)
             .then((response) => {
-                setArticles(response.data);
+                setArticles(response.data.data);
                 setLoading(false);
             })
             .catch((error) => {
