@@ -7,6 +7,7 @@ function View(props) {
     const [loading, setLoading] = useState(true);
     const { id } = useParams();
     const [selectedArticle, setSelectedArticle] = useState(null);
+    const [password, setPassword] = useState('');
 
     useEffect(() => {
         axios.get(`/api/view/`)
@@ -40,6 +41,15 @@ function View(props) {
             });
     };
 
+    const handlePasswordSubmit = async () => {
+        try {
+          await axios.post(`/api/view/${selectedArticle.id}/password`, {password});
+          console.log('비밀번호가 전송되었습니다');
+        } catch (error) {
+          console.error('비밀번호 전송 중에 오류가 생겼습니다: ', error);
+        }
+    };
+            
     const closeModal = () => {
         setSelectedArticle(null);
     };
@@ -107,6 +117,15 @@ function View(props) {
                         <span className="close" onClick={closeModal}>&times;</span>
                         <h2>{selectedArticle.articleTitle}</h2>
                         <p>{selectedArticle.content}</p>
+
+                        {/* 유저가 비밀번호 쓸 폼 */}
+                        <input
+                            type="password"
+                            placeholder="비밀번호 입력"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <button onClick={handlePasswordSubmit}>결정</button>
                     </div>
                 </div>
             )}
